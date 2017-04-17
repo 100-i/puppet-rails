@@ -1,0 +1,15 @@
+{
+  "name": "100-rails",
+  "version": "0.1.0",
+  "author": "100 Industries",
+  "summary": "A modern and helpful rails environment.",
+  "license": "Apache-2.0",
+  "source": "https://github.com/100i/puppet-rails.git",
+  "project_page": "https://github.com/100i/puppet-rails",
+  "issues_url": "https://github.com/100i/puppet-rails/issues",
+  "dependencies": [
+    {"name":"puppetlabs-stdlib","version_requirement":">= 1.0.0"}
+  ],
+  "data_provider": null
+}
+
