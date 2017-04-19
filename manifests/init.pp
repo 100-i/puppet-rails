@@ -69,6 +69,12 @@ class rails {
 # package { 'postgresql-9.5', 'libpq-dev': ensure => present }
 
   # SQLite3 & Rails
-  package { 'sqlite3': ensure => present }
+  package { 'sqlite3', 'libsqlite3-dev' ]:
+    ensure => present 
+  }
+
+  #rbenv::gem { 'sqlite3':
+  #  ruby_version => '2.4.1'
+  #}
 
 }
