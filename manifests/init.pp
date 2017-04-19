@@ -69,7 +69,7 @@ class rails {
 # package { 'postgresql-9.5', 'libpq-dev': ensure => present }
 
   # SQLite3 & Rails
-  package { [ 'sqlite3', 'libsqlite3-dev' ] ]:
+  package { [ 'sqlite3', 'libsqlite3-dev' ]:
     ensure => present 
   }
 
