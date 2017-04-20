@@ -50,7 +50,7 @@ class rails {
   class { 'rbenv': latest => true }
 
   # rbenv plugins: ruby-build, ruby-vars
-  rbenv::plugin { [ 'rbenv/ruby-vars', 'rbenv/ruby-build' ]: latest => true }
+  rbenv::plugin { [ 'rbenv/rbenv-vars', 'rbenv/ruby-build' ]: latest => true }
 
   # Ruby version 2.4.1
   rbenv::build { '2.4.1': global => true }
