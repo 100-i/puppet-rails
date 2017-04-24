@@ -58,9 +58,18 @@ class rails {
   rbenv::build { '2.4.1': global => true }
 
   # Gems
-  rbenv::gem { [ 'rails', 'r10k' ]:
+
+  # r10k Gem
+  rbenv::gem { 'r10k':
     ruby_version => '2.4.1',
     skip_docs    => true,
+  }
+
+  # Rails Gem
+  rbenv::gem { 'rails':
+    ruby_version => '2.4.1',
+    skip_docs    => true,
+    version      => '5.1.0.rc1',
   }
 
   # MySQL & Rails
