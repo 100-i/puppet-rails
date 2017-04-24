@@ -49,12 +49,15 @@ class rails {
   # rbenv
   class { 'rbenv': latest => true }
 
-  # rbenv plugins: ruby-build, ruby-vars
+  # Rbenv
+  # -----
+
+  # rbenv plugins
   rbenv::plugin { [ 'rbenv/rbenv-vars', 'rbenv/ruby-build' ]: 
     latest => true
   }
 
-  # Ruby version 2.4.1
+  # Ruby 2.4.1
   rbenv::build { '2.4.1': global => true }
 
   # Gems
@@ -72,6 +75,11 @@ class rails {
     version      => '5.1.0.rc1',
   }
 
+  # Yarn System Package
+  package { 'yarn':
+    ensure => present,
+  }
+
   # MySQL & Rails
 # $rails_mysql = [ 'mysql-server', 'mysql-client', 'libmysqlclient-dev' ]
 # package { $rails_mysql :
@@ -86,9 +94,4 @@ class rails {
   package { [ 'sqlite3', 'libsqlite3-dev' ]:
     ensure => present 
   }
-
-  #rbenv::gem { 'sqlite3':
-  #  ruby_version => '2.4.1'
-  #}
-
 }
