@@ -50,13 +50,18 @@ class rails {
   class { 'rbenv': latest => true }
 
   # rbenv plugins: ruby-build, ruby-vars
-  rbenv::plugin { [ 'rbenv/rbenv-vars', 'rbenv/ruby-build' ]: latest => true }
+  rbenv::plugin { [ 'rbenv/rbenv-vars', 'rbenv/ruby-build' ]: 
+    latest => true
+  }
 
   # Ruby version 2.4.1
   rbenv::build { '2.4.1': global => true }
 
   # Gems
-  rbenv::gem { [ 'rails', 'r10k' ]: ruby_version => '2.4.1' }
+  rbenv::gem { [ 'rails', 'r10k' ]:
+    ruby_version => '2.4.1',
+    skip_docs    => true,
+  }
 
   # MySQL & Rails
 # $rails_mysql = [ 'mysql-server', 'mysql-client', 'libmysqlclient-dev' ]
