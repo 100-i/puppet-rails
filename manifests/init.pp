@@ -39,11 +39,6 @@ class rails (
   $ruby_version  = '2.5.0-dev',
   $rails_version = '5.1.1',
 ) {
-  ## Yarn ##
-  # Install Yarn as a system package.
-  package { 'yarn':
-    ensure => present,
-  }
 
   package { 'autoconf':
     ensure => present,
@@ -82,16 +77,19 @@ class rails (
     version      => $rails_version,
   }
 
+  ## Database Backaend ##
+  # Uncomment the desired database backends
+  # TODO Use a parameter to select the db engine.
 
   # MySQL & Rails
-# $rails_mysql = [ 'mysql-server', 'mysql-client', 'libmysqlclient-dev' ]
-# package { $rails_mysql :
-#   ensure => present
-# }
+  #$rails_mysql = [ 'mysql-server', 'mysql-client', 'libmysqlclient-dev' ]
+  #package { $rails_mysql :
+  #  ensure => present
+  #}
 
   # Postgresql & Rails
-# package { 'postgresql-common': ensure => present }
-# package { 'postgresql-9.5', 'libpq-dev': ensure => present }
+  #package { 'postgresql-common': ensure => present }
+  #package { 'postgresql-9.5', 'libpq-dev': ensure => present }
 
   # SQLite3 & Rails
   package { [ 'sqlite3', 'libsqlite3-dev' ]:
