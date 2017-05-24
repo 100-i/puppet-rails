@@ -43,7 +43,7 @@
 # Copyright 2017, 100 Industries; unless otherwise noted.
 #
 class rails (
-  $ruby_vesion   = '2.5.0-dev',
+  $ruby_version  = '2.5.0-dev',
   $rails_version = '5.1.1',
 ) {
   package { 'autoconf':
