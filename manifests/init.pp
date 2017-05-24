@@ -54,7 +54,7 @@ class rails (
     ensure => present,
   }
 
-  class { 'nodejs': version => latest } #NodeJS
+  class { 'nodejs': version => latest } # NodeJS
 
   ## Rbenv ##
   class { 'rbenv': latest => true } # Install rbenv
@@ -65,7 +65,7 @@ class rails (
   }
 
   # Build the defined Ruby version
-  rbenv::build { $ruby_version: global => true }
+  rbenv::build { "${ruby_version}": global => true }
 
   ## Gems ##
   # Install system wide gems via rbenv.
