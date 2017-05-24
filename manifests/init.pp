@@ -6,24 +6,17 @@
 # Parameters
 # ----------
 #
-# Document parameters here.
-#
-# * `sample parameter`
-# Explanation of what this parameter affects and what it defaults to.
-# e.g. "Specify one or more upstream ntp servers as an array."
-#
 # Variables
 # ----------
 #
 # Here you should define a list of variables that this module would require.
 #
-# * `sample variable`
-#  Explanation of how this variable affects the function of this class and if
-#  it has a default. e.g. "The parameter enc_ntp_servers must be set by the
-#  External Node Classifier as a comma separated list of hostnames." (Note,
-#  global variables should be avoided in favor of class parameters as
-#  of Puppet 2.6.)
+# * `ruby_version`
+# The version of Ruby that rbenv will install.
 #
+# * `rails_version`
+# The version of Rails that rbenv will install.
+
 # Examples
 # --------
 #
@@ -46,6 +39,12 @@ class rails (
   $ruby_version  = '2.5.0-dev',
   $rails_version = '5.1.1',
 ) {
+  ## Yarn ##
+  # Install Yarn as a system package.
+  package { 'yarn':
+    ensure => present,
+  }
+
   package { 'autoconf':
     ensure => present,
   }
@@ -57,19 +56,20 @@ class rails (
   class { 'nodejs': version => latest } # NodeJS
 
   ## Rbenv ##
+  # Install Rbenv on the system to manage the system's Ruby version.
   class { 'rbenv': latest => true } # Install rbenv
 
-  # rbenv plugins
+  # Rbenv plugins.
   rbenv::plugin { [ 'rbenv/rbenv-vars', 'rbenv/ruby-build' ]: 
     latest => true
   }
 
-  # Build the defined Ruby version
+  # Build the defined Ruby version.
   rbenv::build { $ruby_version : global => true }
 
   ## Gems ##
   # Install system wide gems via rbenv.
-  #
+
   # r10k Gem
   rbenv::gem { 'r10k':
     ruby_version => $ruby_version,
@@ -79,14 +79,9 @@ class rails (
   rbenv::gem { 'rails':
     ruby_version => $ruby_version,
     skip_docs    => true,
-    version      => '5.1.0.rc1',
+    version      => $rails_version,
   }
 
-  ## Yarn ##
-  # Install Yarn as a system package.
-  package { 'yarn':
-    ensure => present,
-  }
 
   # MySQL & Rails
 # $rails_mysql = [ 'mysql-server', 'mysql-client', 'libmysqlclient-dev' ]
