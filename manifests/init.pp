@@ -65,7 +65,7 @@ class rails (
   }
 
   # Build the defined Ruby version
-  rbenv::build { "${ruby_version}": global => true }
+  rbenv::build { $ruby_version : global => true }
 
   ## Gems ##
   # Install system wide gems via rbenv.
