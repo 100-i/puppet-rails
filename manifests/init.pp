@@ -42,40 +42,48 @@
 #
 # Copyright 2017, 100 Industries; unless otherwise noted.
 #
-class rails {
-  # NodeJS
-  class { 'nodejs': version => latest }
+class rails (
+  $ruby_vesion   = '2.5.0-dev',
+  $rails_version = '5.1.1',
+) {
+  package { 'autoconf':
+    ensure => present,
+  }
 
-  # rbenv
-  class { 'rbenv': latest => true }
+  package { 'bison':
+    ensure => present,
+  }
 
-  # Rbenv
-  # -----
+  class { 'nodejs': version => latest } #NodeJS
+
+  ## Rbenv ##
+  class { 'rbenv': latest => true } # Install rbenv
 
   # rbenv plugins
   rbenv::plugin { [ 'rbenv/rbenv-vars', 'rbenv/ruby-build' ]: 
     latest => true
   }
 
-  # Ruby 2.4.1
-  rbenv::build { '2.4.1': global => true }
+  # Build the defined Ruby version
+  rbenv::build { $ruby_version: global => true }
 
-  # Gems
-
+  ## Gems ##
+  # Install system wide gems via rbenv.
+  #
   # r10k Gem
   rbenv::gem { 'r10k':
-    ruby_version => '2.4.1',
+    ruby_version => $ruby_version,
     skip_docs    => true,
   }
-
   # Rails Gem
   rbenv::gem { 'rails':
-    ruby_version => '2.4.1',
+    ruby_version => $ruby_version,
     skip_docs    => true,
     version      => '5.1.0.rc1',
   }
 
-  # Yarn System Package
+  ## Yarn ##
+  # Install Yarn as a system package.
   package { 'yarn':
     ensure => present,
   }
